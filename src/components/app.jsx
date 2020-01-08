@@ -9,8 +9,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      gifs: ["BBkKEBJkmFbTG", "l2Je66zG6mAAZxgqI", "xT5LMpF8gl2d6Wqlm8"],
-      selectedGifId: "3oriffGtQjzOueT1aE"
+      gifs: [{ id: "BBkKEBJkmFbTG"}, { id: "l2Je66zG6mAAZxgqI"}, { id: "xT5LMpF8gl2d6Wqlm8"}],
+      selectedGifId: "3oriffGtQjzOueT1aE",
+      focused: false
     };
   }
 
@@ -29,12 +30,25 @@ class App extends Component {
     });
   }
 
+  focus = () => {
+    this.setState({
+      focused: !this.state.focused
+    });
+  }
+
+  classNamesForGif = () => {
+    if (this.state.focused) {
+      return "selected-gif focused";
+    }
+    return "selected-gif";
+  }
+
   render() {
     return (
       <div>
         <div className="left-scene">
-          <SearchBar search={this.search} />
-          <div className="selected-gif">
+          <SearchBar search={this.search} focus={this.focus} />
+          <div className={this.classNamesForGif()}>
             <Gif id={this.state.selectedGifId} />
           </div>
         </div>

@@ -6,10 +6,19 @@ class SearchBar extends Component {
     this.props.search(event.target.value);
   }
 
+  handleFocus = () => {
+    this.props.focus();
+  }
+
   render() {
     return (
-      <input type="text" className="form-control form-search"
-        onChange={this.handleKey} />
+      <input 
+        type="text"
+        className="form-control form-search"
+        onChange={this.handleKey}
+        onFocus={this.handleFocus}
+        onBlur={this.handleFocus}
+      />
     );
   }
 }
